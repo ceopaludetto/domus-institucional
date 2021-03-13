@@ -1,0 +1,14 @@
+@each $key in map-keys($colors){
+    .text-#{$key}{
+        color: color($key) !important;
+        &a:hover{
+            color: darken(color($key), 10%);
+        }
+    }
+    .#{$key}{
+        background-color: color($key);
+    }
+}
+.transparent{
+    background-color: transparent;
+}

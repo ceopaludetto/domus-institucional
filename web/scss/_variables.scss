@@ -1,0 +1,110 @@
+$white:  #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:  #000 !default;
+
+$grays: () !default;
+$grays: map-merge((
+    900: $gray-900
+), $grays);
+
+$yellow: #ffc100 !default;
+$purple:  #6000b5 !default;
+$red: #e20040 !default;
+$dark: #191a1f !default;
+
+$colors: () !default;
+$colors: map-merge((
+    "purple": $purple,
+    "dark": $dark,
+    "black": $black,
+    "white": $white,
+    "yellow": $yellow,
+    "red": $red,
+), $colors);
+
+$default-color: $red !default;
+$body-bg: $white !default;
+$body-color: $black !default;
+
+$link-color: $default-color !default;
+$link-hover-color: darken($link-color, 7.5%) !default;
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+
+$paragraph-margin-bottom: 1rem !default;
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+), $spacers);
+
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+) !default;
+
+$containers: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px
+) !default;
+
+$grid-size: 12;
+$gutter: 2rem;
+
+$yiq-contrasted-threshold:  150 !default;
+$yiq-text-dark: $gray-900 !default;
+$yiq-text-light: $white !default;
+
+$text-muted: $gray-600 !default;
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-base: 1rem !default;
+
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 500 !default;
+
+$font-weight-base: $font-weight-normal !default;
+$line-height-base: 1.5 !default;
+
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
+
+$headings-margin-bottom: ($spacer / 2) !default;
+$headings-font-family: inherit !default;
+$headings-font-weight: $font-weight-bold !default;
+$headings-line-height: 1.2 !default;
+$headings-color: inherit !default;
+
+$dt-font-weight: $font-weight-bold !default;
+
+$table-cell-padding: .75rem !default;
+$table-caption-color: $text-muted !default;
+
+$label-margin-bottom: .5rem !default;

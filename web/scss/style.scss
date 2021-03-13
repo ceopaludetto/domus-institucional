@@ -1,0 +1,538 @@
+@import 'variables';
+@import 'functions';
+@import 'breakpoints';
+@import 'grid';
+@import 'flex';
+@import 'spacing';
+@import 'reboot';
+@import 'color';
+
+$texts: (
+    'left': left,
+    'right': right,
+    'center': center,
+    'justify': justify
+);
+
+@each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+        @each $i, $v in $texts{
+            .text#{$infix}-#{$i}{
+                text-align: $v!important;
+            }
+        }
+    }
+}
+
+body{
+    overflow-x: hidden;
+}
+
+aside, .backdrop{
+    position: absolute;
+    height: 100vh;
+}
+
+.backdrop{
+    width: 100vw;
+    background-color: rgba(0,0,0,.5);
+    position: fixed;
+    z-index: 2;
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
+#Sidebar{
+    background-color: $default-color;
+    width: 100%;
+    max-width: 300px;
+    overflow: hidden;
+    position: fixed;
+    left: -300px;
+    transition: left .5s ease;
+    z-index: 3;
+    &.active{
+        left: 0;
+    }
+    .sidebar-list{
+        .sidebar-list-item{
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            letter-spacing: .15rem;
+            font-weight: 600;
+            width: 100%;
+            position: relative;
+            display: block;
+            padding: .5rem;
+            border-radius: .25rem;
+            background-color: $default-color;
+            color: color-yiq($default-color);
+            &:before{
+                content: '';
+                width: 0;
+                margin-left: -20px;
+                height: 1px;
+                position: absolute;
+                top: calc(50% - .5px);
+                left: 0;
+                background-color: color-yiq($default-color);
+                transition: width .15s ease-in-out;
+            }
+            &:hover{
+                text-decoration: none;
+                &:before{
+                    width: 20px;
+                }
+            }
+            &.active{
+                &:before{
+                    height: 3px;
+                    top: calc(50% - 1.5px);
+                    width: 20px!important;
+                }
+            }
+        }
+    }
+}
+
+#Main{
+    width: 100%;
+    overflow-x: hidden;
+    z-index: 1;
+    border-top: 3px solid $default-color;
+}
+
+#Arrow{
+    display: block;
+    animation: arrow 2s ease infinite;
+    @at-root{
+        @keyframes arrow{
+            0%{
+                transform: translateY(0);
+            }
+            50%{
+                transform: translateY(16px);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+.hamb-container{
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 1;
+    &:after{
+        content: '';
+        position: absolute;
+        border-radius: .25rem;
+        width: 110%;
+        height: 110%;
+        top: -5%;
+        left: -5%;
+        transform: rotate(45deg);
+        background-color: $default-color;
+        transition: transform .25s ease;
+    }
+    &:hover{
+        &:after{
+            transform: none;
+        }
+    }
+    .hamb{
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        position: relative;
+        z-index: 2;
+        width: 25px;
+        display: block;
+        box-sizing: content-box;
+        padding: 16.5px 8px;
+        &:before, &:after{
+            content: '';
+            height: 2px;
+            display: block;
+            background-color: color-yiq($default-color);
+            transition: width .25s ease;    
+        }
+        &:before{
+            width: 80%;
+        }
+        &:after{
+            width: 100%;
+            margin-top: .25rem;
+        }
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            &:before{
+                width: 100%;
+            }
+        }
+    }
+}
+
+.title{
+    user-select: none;
+    color: $black;
+    font-size: 4rem;
+    font-weight: 600;
+    &:after{
+        content: '';
+        display: block;
+        width: 50px;
+        height: 6px;
+        margin-left: 4px;
+        background-color: $default-color;
+    }
+    .dot{
+        color: $black;
+        font-size: 4rem;
+        font-weight: 600;
+        user-select: none;
+    }
+}
+
+#Arrow{
+    color: $default-color;
+    font-size: 3rem;
+}
+
+.btn-default{
+    background-color: $default-color;
+    color: color-yiq($default-color)!important;
+    &:hover{
+        background-color: lighten($default-color, 5%);
+    }
+    &:focus{
+        box-shadow: 0px 0px 0px 4px rgba($default-color, .5);
+    }
+}
+
+circle{
+    stroke-width:4px;
+}
+svg{
+    $dasharray-circle: 1380;
+    $dasharray: 1340;
+    .Four{
+        fill-opacity: 1;
+        stroke-width: 1px;
+        stroke-dasharray: $dasharray;
+        animation: animate 3s ease;
+    }
+    .Mi{
+        fill-opacity: 1;
+        stroke-width: 1px;
+        stroke-dasharray: $dasharray;
+        animation: animate 3s ease;
+    }
+    .Circle{
+        fill:none;
+        fill-rule:evenodd;
+        stroke-width:4px;
+        stroke-dasharray: $dasharray-circle;
+        animation: animate-circle 3s ease;
+    }
+    @at-root{
+        @keyframes animate {
+            0%{
+                opacity: 0;
+                fill-opacity: 0;
+                stroke-dashoffset: $dasharray;
+            }
+
+            30%{
+                opacity: 1;
+                fill-opacity: 0;
+                stroke-dashoffset: $dasharray;
+            }
+
+            90%{
+                opacity: 10;
+                fill-opacity: 0;
+                stroke-dashoffset: 0;
+            }
+            
+            100%{
+                opacity: 10;
+                fill-opacity: 1;
+                stroke-dashoffset: 0;
+            }
+        }
+    }
+    @at-root{
+        @keyframes animate-circle {
+            0%{
+                opacity: 0;
+                fill-opacity: 0;
+                stroke-dashoffset: $dasharray-circle;
+            }
+
+            30%{
+                opacity: 1;
+                fill-opacity: 0;
+                stroke-dashoffset: $dasharray-circle;
+            }
+
+            90%{
+                opacity: 10;
+                fill-opacity: 0;
+                stroke-dashoffset: 0;
+            }
+            
+            100%{
+                opacity: 10;
+                fill-opacity: 1;
+                stroke-dashoffset: 0;
+            }
+        }
+    }
+}
+
+.material-icons{
+    user-select: none;
+}
+
+.icon-feature{
+    background-color: $black;
+    border-radius: .25rem;
+    padding: 2rem;
+    box-shadow: 4px 4px 0px $white, 7px 7px 0px $default-color;
+    i{
+        color: $default-color;
+        font-size: 6rem!important;
+    }
+    &.inverted{
+        background-color: $white;
+        box-shadow: 4px 4px 0px $black, 7px 7px 0px $default-color;
+    }
+
+    &.icon-history{
+        background-color: $default-color;
+        box-shadow: 4px 4px 0px $white, 7px 7px 0px $black;
+        i{
+            font-size: 12rem!important;
+        }
+        &.inverted{
+            box-shadow: 4px 4px 0px $black, 7px 7px 0px $white;
+        }
+    }
+}
+
+.form{
+    background-color: $white;
+    border-radius: .25rem;
+    padding: 2rem;
+    box-shadow: 4px 4px 0px $black, 7px 7px 0px $default-color;
+}
+
+label{
+    color: $black;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: .15rem;
+    font-weight: 600;
+}
+
+.form-control{
+    background-color: $black;
+    border-radius: .25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: .75rem;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    transition: background-color .25s ease, box-shadow .25s ease-in-out;
+    &:focus{
+        outline: none;
+        box-shadow: 0px 0px 0px 4px rgba($default-color, .5);
+    }
+}
+
+.form-group{
+    margin-bottom: 1rem;
+}
+
+.btn{
+    cursor: pointer;
+    padding: .75rem;
+    letter-spacing: .15rem;
+    border: none;
+    box-sizing: border-box;
+    border-radius: .25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: $black;
+    box-shadow: none;
+    transition: background-color .25s ease, box-shadow .25s ease-in-out;
+    &:focus{
+        outline: none;
+    }
+    @each $v in map-keys($colors){
+        &.btn-#{$v}{
+            background-color: color($v);
+            color: color-yiq(color($v));
+            &:hover{
+                background-color: lighten(color($v), 5%);
+            }
+            &:focus{
+                box-shadow: 0px 0px 0px 4px rgba(color($v), .5);
+            }
+        }
+    }
+}
+
+textarea{
+    min-height: 100px;
+}
+
+hr{
+    width: 100%;
+    height: 0;
+    border-top: 1px solid $default-color;
+    @each $v in map-keys($colors){
+        &.#{$v}{
+            border-color: color($v);
+        }
+    }
+}
+
+h4{
+    letter-spacing: .11rem;
+}
+
+h3{
+    letter-spacing: .15rem;
+    .dot{
+        color: $default-color;
+        letter-spacing: .15rem;
+        font-size: 1.5rem;
+    }
+}
+
+h2:not(.title){
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: $dark;
+    strong{
+        font-size: 2rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: $white;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: $red;
+}
+
+::-webkit-scrollbar-track{
+    background-color: $white;
+}
+
+.vh100{
+    height: 100vh;
+    .row{
+        height: 100%;
+    }
+}
+
+a.btn{
+    &:hover{
+        color: inherit;
+    }
+}
+
+#Historia{
+    .col-lg-4{
+        margin-right: -1rem;
+    }
+
+
+    @at-root{
+        @media (max-width: map-get($map: $breakpoints, $key: 'md')){
+            #Historia{
+                .col-lg-4{
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+
+#Missao{
+    .col-lg-4{
+        margin-left: -1rem;
+    }
+
+
+    @at-root{
+        @media (max-width: map-get($map: $breakpoints, $key: 'md')){
+            #Missao{
+                .col-lg-4{
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding-left: 1em; 
+    text-indent: -1rem;
+    &:before{
+        content: "• ";
+        color: $default-color;
+    }
+}
+
+#Footer{
+    .sec{
+        border-left: 1px solid color-yiq($default-color);
+        color: color-yiq($default-color);
+    }
+    a[href^="#"]{
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: .15rem;
+        font-weight: 600;
+        color: color-yiq($default-color);
+        display: block;
+    }
+    @at-root{
+        @media (max-width: map-get($map: $breakpoints, $key: 'md')){
+            #Footer{
+                .sec{
+                    border-left: none;
+                }
+                .first{
+                    border-top: 1px solid color-yiq($default-color);
+                }
+            }
+        }
+    }
+}
+
+.integrante{
+    box-shadow: 4px 4px 0px #fff, 7px 7px 0px #000;
+}
